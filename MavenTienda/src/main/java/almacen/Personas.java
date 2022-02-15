@@ -31,11 +31,11 @@ public class Personas {
 		return "Personas [username=" + username + ", password=" + password + "]";
 	}
 	
-	public static Personas crearCuenta(String username, String password) {
-		almacen.ArrayListsAlmacen.add(Personas);
-		return Personas;
+	public boolean comparar(Personas a) {
+		if(this.getUsername().equals(a.getUsername()) && this.getPassword().equals(a.getPassword())) {
+			return true;
+		}
+		return false;
 	}
-	public void borrarCuenta() {
-		ArrayListsAlmacen.remove(Personas);
-	}
+	
 }
