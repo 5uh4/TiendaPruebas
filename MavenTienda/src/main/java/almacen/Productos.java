@@ -1,11 +1,18 @@
 package almacen;
 
-public class Objetos {
+public class Productos {
 	private String nombre;
 	private double precio;
 	private double cantidad;
 
-	public Objetos(String nombre, double precio, double cantidad) {
+	/**
+	 * Aquí debería crearse el elemento padre de todos los demás productos, que
+	 * contiene sus elementos "genericos".
+	 * @param nombre Nombre del elemento.
+	 * @param precio Precio del producto.
+	 * @param cantidad Cantidad que se acumula del mismo.
+	 */
+	public Productos(String nombre, double precio, double cantidad) {
 		super();
 		this.nombre = nombre;
 		this.precio = precio;

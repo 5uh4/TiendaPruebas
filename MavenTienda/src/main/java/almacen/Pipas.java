@@ -1,6 +1,6 @@
 package almacen;
 
-public class Pipas extends Objetos {
+public class Pipas extends Productos {
 
 	
 
