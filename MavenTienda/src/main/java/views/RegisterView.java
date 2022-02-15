@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import almacen.Personas;
+
 public class RegisterView {
 
 	private JFrame frame;
@@ -39,6 +41,9 @@ public class RegisterView {
 	 */
 	public RegisterView() {
 		initialize();
+		frame.revalidate();
+		frame.repaint();
+		frame.setVisible(true);
 	}
 
 	/**
@@ -57,12 +62,12 @@ public class RegisterView {
 
 		// Etiqueta que solicita una contraseña
 		JLabel lblContraseña = new JLabel("Introduce tu contrase\u00F1a:");
-		lblContraseña.setBounds(22, 98, 113, 13);
+		lblContraseña.setBounds(22, 98, 138, 13);
 		frame.getContentPane().add(lblContraseña);
 
 		// Etiqueta para confirmar la contraseña y asegurar que es correcta.
 		JLabel lblConfirmar = new JLabel("Confirma tu contrase\u00F1a:");
-		lblConfirmar.setBounds(22, 140, 113, 13);
+		lblConfirmar.setBounds(22, 140, 138, 13);
 		frame.getContentPane().add(lblConfirmar);
 
 		// Aquí se escribe el usuario
@@ -79,28 +84,38 @@ public class RegisterView {
 		 */
 		final JButton btnCrear = new JButton("Crear cuenta");
 		btnCrear.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if (txtFUser != null && passwordField != null && passwordConfirm != null
-						&& passwordField == passwordConfirm) {
+				if ((txtFUser.getText() != null) && (passwordField.getText() != null)
+						&& (passwordConfirm.getText() != null)
+						&& passwordField.getText().equals(passwordConfirm.getText())) {
 					new TiendaView();
-					//add usuario al arraylist que hay en el almacen.
-				}
-				else {
+					frame.dispose();
+					String nombreUsuario = txtFUser.getText();
+					String contraseña = passwordField.getText();
+					Personas usuarioActual = new Personas(nombreUsuario, contraseña);
+					almacen.ArrayListsAlmacen.cuentas.add(usuarioActual);
+					for(int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+						System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getUsername());
+						System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getPassword()); }
+					// add usuario al arraylist que hay en el almacen.}
+				} else {
 					JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
 				}
 			}
 		});
-		btnCrear.setBounds(64, 201, 96, 21);
+		btnCrear.setBounds(55, 201, 114, 21);
 		frame.getContentPane().add(btnCrear);
-		
-		JLabel lblLogin = new JLabel("\u00BFYa tienes cuenta?");
-		lblLogin.setBounds(237, 178, 96, 13);
+
+		JLabel lblLogin = new JLabel("<html>\u00BFYa tienes<br>cuenta?</html>");
+		lblLogin.setBounds(237, 166, 96, 25);
 		frame.getContentPane().add(lblLogin);
-		//Boton que lleva de vuelta al Login.
+		// Boton que lleva de vuelta al Login.
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new LoginViewTienda();
+				frame.dispose();
 			}
 		});
 		btnLogin.setBounds(237, 201, 96, 21);

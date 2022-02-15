@@ -35,6 +35,9 @@ public class TiendaView {
 	 */
 	public TiendaView() {
 		initialize();
+		frame.revalidate();
+		frame.repaint();
+		frame.setVisible(true);
 	}
 
 	/**
@@ -54,7 +57,7 @@ public class TiendaView {
 
 		// Boton que permite añadir pipas a la cesta.
 		JButton btnPipas = new JButton("A\u00F1adir a la cesta");
-		btnPipas.setBounds(181, 57, 114, 21);
+		btnPipas.setBounds(181, 57, 134, 21);
 		frame.getContentPane().add(btnPipas);
 
 		// Etiqueta de pipas.
@@ -99,7 +102,7 @@ public class TiendaView {
 
 		// Boton para añadir pan a la cesta.
 		JButton btnPan = new JButton("A\u00F1adir a la cesta");
-		btnPan.setBounds(181, 98, 114, 21);
+		btnPan.setBounds(181, 98, 134, 21);
 		frame.getContentPane().add(btnPan);
 
 		// Etiqueta con chicles
@@ -119,7 +122,7 @@ public class TiendaView {
 
 		// Botón para añadir chicles a la cesta.
 		JButton btnChicle = new JButton("A\u00F1adir a la cesta");
-		btnChicle.setBounds(181, 147, 114, 21);
+		btnChicle.setBounds(181, 147, 134, 21);
 		frame.getContentPane().add(btnChicle);
 
 		/**
@@ -143,6 +146,7 @@ public class TiendaView {
 				if (JOptionPane.OK_OPTION == confirmado) {
 					System.out.println("Saliendo.");
 					new LoginViewTienda();
+					frame.dispose();
 					JOptionPane.showMessageDialog(btnOff, "Saliendo.");
 				} else {
 					JOptionPane.showMessageDialog(btnOff, "Volviendo.");
@@ -155,7 +159,18 @@ public class TiendaView {
 		/**
 		 * Botón que se encarga de borrar la cuenta que se está utilizando actualmente.
 		 */
-		JButton btnNuke = new JButton("<html>Destruir<br>cuenta</html>");
+		final JButton btnNuke = new JButton("<html>Destruir<br>cuenta</html>");
+		btnNuke.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean encontrado = false;
+				for(int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+					if (LoginViewTienda.userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))){
+						encontrado = true;
+						JOptionPane.showMessageDialog(btnNuke, "Cuenta borrada.");
+					}
+				} 
+			}
+		});
 		btnNuke.setBounds(325, 124, 95, 42);
 		frame.getContentPane().add(btnNuke);
 	}

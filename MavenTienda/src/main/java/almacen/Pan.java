@@ -18,17 +18,17 @@ public class Pan extends Productos {
 	 * Función que debería aumentar la cantidad de panes en el ArrayList del
 	 * almacén.
 	 */
-	public void aumentarPanes() {
-		almacen.ArrayListsAlmacen.pan.add(Pan);
-	}
+//	public void aumentarPanes() {
+//		almacen.ArrayListsAlmacen.listaPan.add(Pan);
+//	}
 	/**
 	 * 
 	 */
-	public void reducirPanes() {
-		for (int i = pipas.size(); i > 0; i--) {
-			pan.remove(i);
-		}
+//	public void reducirPanes() {
+//		for (int i = listaPipas.size(); i > 0; i--) {
+//			pan.remove(i);
+//		}
 
-	}
+//	}
 
 }

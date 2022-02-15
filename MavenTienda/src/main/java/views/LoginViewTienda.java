@@ -7,15 +7,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import almacen.Personas;
+
 public class LoginViewTienda {
 
+	
 	private JFrame frame;
 	private JTextField txtFUsuario;
 	private JPasswordField passwordField;
-	//private Personas usuario;
+	public static Personas userActual;
+	// private Personas usuario;
 
 	/**
 	 * Launch the application. Aquí se abre la aplicación que se define más abajo.
@@ -40,6 +45,7 @@ public class LoginViewTienda {
 		initialize();
 		frame.revalidate();
 		frame.repaint();
+		frame.setVisible(true);
 	}
 
 	/**
@@ -52,11 +58,11 @@ public class LoginViewTienda {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(77, 68, 45, 13);
+		lblUsuario.setBounds(67, 68, 55, 13);
 		frame.getContentPane().add(lblUsuario);
 
 		JLabel lblContraseña = new JLabel("Contrase\u00F1a:");
-		lblContraseña.setBounds(67, 108, 63, 13);
+		lblContraseña.setBounds(67, 108, 85, 13);
 		frame.getContentPane().add(lblContraseña);
 
 		txtFUsuario = new JTextField();
@@ -69,10 +75,25 @@ public class LoginViewTienda {
 		 * que compruebe que el usuario (con nombre y contraseña) coincida con alguno de
 		 * los presentes en el almacen de arraylists.
 		 */
-		JButton btnEntrar = new JButton("Entrar");
+		final JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new TiendaView();
+				String username = txtFUsuario.getText();
+				@SuppressWarnings("deprecation")
+				String password = passwordField.getText();
+				userActual = new Personas(username, password);
+				boolean encontrado = false;
+				for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+					if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
+						encontrado = true;
+					}
+				}
+				if (encontrado == true) {
+					new TiendaView();
+					frame.dispose();
+				} else {
+					JOptionPane.showMessageDialog(btnEntrar, "No existe ese usuario.");
+				}
 			}
 		});
 		btnEntrar.setBounds(67, 179, 85, 21);
@@ -86,13 +107,14 @@ public class LoginViewTienda {
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new RegisterView();
+				frame.dispose();
 			}
 		});
 		btnRegistro.setBounds(207, 179, 109, 21);
 		frame.getContentPane().add(btnRegistro);
 
-		JLabel lblRegistro = new JLabel("\u00BFNo tienes cuenta?");
-		lblRegistro.setBounds(218, 161, 109, 13);
+		JLabel lblRegistro = new JLabel("<html>\u00BFNo tienes<br>cuenta?</html>");
+		lblRegistro.setBounds(218, 148, 109, 26);
 		frame.getContentPane().add(lblRegistro);
 
 		/**
@@ -101,5 +123,6 @@ public class LoginViewTienda {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(180, 108, 147, 19);
 		frame.getContentPane().add(passwordField);
+
 	}
 }
