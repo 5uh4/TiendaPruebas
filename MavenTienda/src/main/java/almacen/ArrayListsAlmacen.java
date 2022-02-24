@@ -13,4 +13,5 @@ public class ArrayListsAlmacen {
 	public static ArrayList<Chicles> listaChicles = new ArrayList<Chicles>();
 	public static ArrayList<Pan> listaPan = new ArrayList<Pan>();
 	
+	public static int sumaCesta = ((listaPipas.size()) + (listaPan.size()) + (listaChicles.size()));
 }

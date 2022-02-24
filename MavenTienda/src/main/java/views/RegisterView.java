@@ -12,6 +12,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import almacen.Personas;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegisterView {
 
@@ -51,6 +54,7 @@ public class RegisterView {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(204, 102, 51));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -83,6 +87,29 @@ public class RegisterView {
 		 * confirmar contraseña coinciden.
 		 */
 		final JButton btnCrear = new JButton("Crear cuenta");
+		btnCrear.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if ((txtFUser.getText() != null) && (passwordField.getText() != null)
+							&& (passwordConfirm.getText() != null)
+							&& passwordField.getText().equals(passwordConfirm.getText())) {
+						new TiendaView();
+						frame.dispose();
+						String nombreUsuario = txtFUser.getText();
+						String contraseña = passwordField.getText();
+						Personas usuarioActual = new Personas(nombreUsuario, contraseña);
+						almacen.ArrayListsAlmacen.cuentas.add(usuarioActual);
+						for(int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+							System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getUsername());
+							System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getPassword()); }
+						// add usuario al arraylist que hay en el almacen.}
+					} else {
+						JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
+					}
+				}
+			}
+		});
 		btnCrear.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {

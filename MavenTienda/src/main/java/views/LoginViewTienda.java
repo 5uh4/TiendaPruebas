@@ -12,13 +12,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import almacen.Personas;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginViewTienda {
 
-	
 	private JFrame frame;
 	private JTextField txtFUsuario;
 	private JPasswordField passwordField;
+	protected Component btnEntrar;
 	public static Personas userActual;
 	// private Personas usuario;
 
@@ -53,6 +57,7 @@ public class LoginViewTienda {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(0, 204, 153));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -66,6 +71,31 @@ public class LoginViewTienda {
 		frame.getContentPane().add(lblContraseña);
 
 		txtFUsuario = new JTextField();
+		txtFUsuario.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String username = txtFUsuario.getText();
+					@SuppressWarnings("deprecation")
+					String password = passwordField.getText();
+					userActual = new Personas(username, password);
+					boolean encontrado = false;
+					for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+						if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
+							encontrado = true;
+						}
+					}
+					if (encontrado == true) {
+						new TiendaView();
+						frame.dispose();
+					} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
+						JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
+					} else {
+						JOptionPane.showMessageDialog(btnEntrar,
+								"No existe ese usuario o la contraseña no es correcta.");
+					}
+				}
+			}
+		});
 		txtFUsuario.setBounds(180, 65, 147, 19);
 		frame.getContentPane().add(txtFUsuario);
 		txtFUsuario.setColumns(10);
@@ -76,11 +106,38 @@ public class LoginViewTienda {
 		 * los presentes en el almacen de arraylists.
 		 */
 		final JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addKeyListener(new KeyAdapter() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String username = txtFUsuario.getText();
+					@SuppressWarnings("deprecation")
+					String password = passwordField.getText();
+					userActual = new Personas(username, password);
+					boolean encontrado = false;
+					for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+						if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
+							encontrado = true;
+						}
+					}
+					if (encontrado == true) {
+						new TiendaView();
+						frame.dispose();
+					} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
+						JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
+					} else {
+						JOptionPane.showMessageDialog(btnEntrar,
+								"No existe ese usuario o la contraseña no es correcta.");
+					}
+				}
+			}
+		});
 		btnEntrar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				String username = txtFUsuario.getText();
-				@SuppressWarnings("deprecation")
-				String password = passwordField.getText();
+				String password = String.valueOf(passwordField.getPassword());
 				userActual = new Personas(username, password);
 				boolean encontrado = false;
 				for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
@@ -91,8 +148,10 @@ public class LoginViewTienda {
 				if (encontrado == true) {
 					new TiendaView();
 					frame.dispose();
+				} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
+					JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
 				} else {
-					JOptionPane.showMessageDialog(btnEntrar, "No existe ese usuario.");
+					JOptionPane.showMessageDialog(btnEntrar, "No existe ese usuario o la contraseña no es correcta.");
 				}
 			}
 		});
@@ -121,6 +180,31 @@ public class LoginViewTienda {
 		 * Esto es especialmente útil porque automáticamente oculta lo que se escribe.
 		 */
 		passwordField = new JPasswordField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String username = txtFUsuario.getText();
+					@SuppressWarnings("deprecation")
+					String password = passwordField.getText();
+					userActual = new Personas(username, password);
+					boolean encontrado = false;
+					for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+						if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
+							encontrado = true;
+						}
+					}
+					if (encontrado == true) {
+						new TiendaView();
+						frame.dispose();
+					} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
+						JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
+					} else {
+						JOptionPane.showMessageDialog(btnEntrar,
+								"No existe ese usuario o la contraseña no es correcta.");
+					}
+				}
+			}
+		});
 		passwordField.setBounds(180, 108, 147, 19);
 		frame.getContentPane().add(passwordField);
 
