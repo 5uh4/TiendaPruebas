@@ -2,8 +2,8 @@ package almacen;
 
 public class Productos {
 	private String nombre;
-	private double precio;
-	private double cantidad;
+	private static double precio;
+	private static double cantidad;
 
 	/**
 	 * Aquí debería crearse el elemento padre de todos los demás productos, que
@@ -15,8 +15,8 @@ public class Productos {
 	public Productos(String nombre, double precio, double cantidad) {
 		super();
 		this.nombre = nombre;
-		this.precio = precio;
-		this.setCantidad(cantidad);
+		Productos.precio = precio;
+		Productos.cantidad = cantidad;
 	}
 
 	public String getNombre() {
@@ -27,25 +27,22 @@ public class Productos {
 		this.nombre = nombre;
 	}
 
-	public double getPrecio() {
+	public static double getPrecio() {
 		return precio;
 	}
 
 	public void setPrecio(double precio) {
-		this.precio = precio;
+		Productos.precio = precio;
 	}
 
-	public double getCantidad() {
+	public static double getCantidad() {
 		return cantidad;
 	}
 
 	public void setCantidad(double cantidad) {
-		this.cantidad = cantidad;
+		Productos.cantidad = cantidad;
 	}
 
-	@Override
-	public String toString() {
-		return "Objetos [nombre=" + nombre + ", precio=" + precio + ", cantidad= " + cantidad + "]";
-	}
+	
 
 }

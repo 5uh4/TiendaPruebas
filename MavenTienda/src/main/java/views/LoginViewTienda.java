@@ -22,8 +22,9 @@ public class LoginViewTienda {
 	private JFrame frame;
 	private JTextField txtFUsuario;
 	private JPasswordField passwordField;
-	protected Component btnEntrar;
 	public static Personas userActual;
+	private JButton btnRegistro;
+	private JButton btnEntrar;
 	// private Personas usuario;
 
 	/**
@@ -47,8 +48,6 @@ public class LoginViewTienda {
 	 */
 	public LoginViewTienda() {
 		initialize();
-		frame.revalidate();
-		frame.repaint();
 		frame.setVisible(true);
 	}
 
@@ -61,7 +60,10 @@ public class LoginViewTienda {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		setUIComponents();
+		setUIBehaviour();
+	}
+	private void setUIComponents() {
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(67, 68, 55, 13);
 		frame.getContentPane().add(lblUsuario);
@@ -71,31 +73,6 @@ public class LoginViewTienda {
 		frame.getContentPane().add(lblContraseña);
 
 		txtFUsuario = new JTextField();
-		txtFUsuario.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String username = txtFUsuario.getText();
-					@SuppressWarnings("deprecation")
-					String password = passwordField.getText();
-					userActual = new Personas(username, password);
-					boolean encontrado = false;
-					for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-						if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
-							encontrado = true;
-						}
-					}
-					if (encontrado == true) {
-						new TiendaView();
-						frame.dispose();
-					} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
-						JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
-					} else {
-						JOptionPane.showMessageDialog(btnEntrar,
-								"No existe ese usuario o la contraseña no es correcta.");
-					}
-				}
-			}
-		});
 		txtFUsuario.setBounds(180, 65, 147, 19);
 		frame.getContentPane().add(txtFUsuario);
 		txtFUsuario.setColumns(10);
@@ -105,56 +82,7 @@ public class LoginViewTienda {
 		 * que compruebe que el usuario (con nombre y contraseña) coincida con alguno de
 		 * los presentes en el almacen de arraylists.
 		 */
-		final JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.addKeyListener(new KeyAdapter() {
-			@SuppressWarnings("deprecation")
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String username = txtFUsuario.getText();
-					@SuppressWarnings("deprecation")
-					String password = passwordField.getText();
-					userActual = new Personas(username, password);
-					boolean encontrado = false;
-					for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-						if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
-							encontrado = true;
-						}
-					}
-					if (encontrado == true) {
-						new TiendaView();
-						frame.dispose();
-					} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
-						JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
-					} else {
-						JOptionPane.showMessageDialog(btnEntrar,
-								"No existe ese usuario o la contraseña no es correcta.");
-					}
-				}
-			}
-		});
-		btnEntrar.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
-				String username = txtFUsuario.getText();
-				String password = String.valueOf(passwordField.getPassword());
-				userActual = new Personas(username, password);
-				boolean encontrado = false;
-				for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-					if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
-						encontrado = true;
-					}
-				}
-				if (encontrado == true) {
-					new TiendaView();
-					frame.dispose();
-				} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
-					JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
-				} else {
-					JOptionPane.showMessageDialog(btnEntrar, "No existe ese usuario o la contraseña no es correcta.");
-				}
-			}
-		});
+		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(67, 179, 85, 21);
 		frame.getContentPane().add(btnEntrar);
 
@@ -162,13 +90,7 @@ public class LoginViewTienda {
 		 * Esto lleva a una nueva vista de Registro que permite meter un usuario nuevo
 		 * (con su usuario y contraseña).
 		 */
-		JButton btnRegistro = new JButton("\u00A1Registrate!");
-		btnRegistro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new RegisterView();
-				frame.dispose();
-			}
-		});
+		btnRegistro = new JButton("\u00A1Registrate!");
 		btnRegistro.setBounds(207, 179, 109, 21);
 		frame.getContentPane().add(btnRegistro);
 
@@ -176,37 +98,57 @@ public class LoginViewTienda {
 		lblRegistro.setBounds(218, 148, 109, 26);
 		frame.getContentPane().add(lblRegistro);
 
-		/**
-		 * Esto es especialmente útil porque automáticamente oculta lo que se escribe.
-		 */
 		passwordField = new JPasswordField();
-		passwordField.addKeyListener(new KeyAdapter() {
+		passwordField.setBounds(180, 108, 147, 19);
+		frame.getContentPane().add(passwordField);
+	}
+	
+	public void setUIBehaviour() {
+		btnEntrar.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String username = txtFUsuario.getText();
-					@SuppressWarnings("deprecation")
-					String password = passwordField.getText();
-					userActual = new Personas(username, password);
-					boolean encontrado = false;
-					for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-						if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
-							encontrado = true;
-						}
-					}
-					if (encontrado == true) {
-						new TiendaView();
-						frame.dispose();
-					} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
-						JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
-					} else {
-						JOptionPane.showMessageDialog(btnEntrar,
-								"No existe ese usuario o la contraseña no es correcta.");
-					}
+					login();
 				}
 			}
 		});
-		passwordField.setBounds(180, 108, 147, 19);
-		frame.getContentPane().add(passwordField);
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				login();
+			}
+		});
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new RegisterView();
+				frame.dispose();
+			}
+		});
+		passwordField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					login();
+				}
+			}
+		});
+	}
 
+	@SuppressWarnings("deprecation")
+	public void login() {
+		String username = txtFUsuario.getText();
+		String password = passwordField.getText();
+		userActual = new Personas(username, password);
+		boolean encontrado = false;
+		for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+			if (userActual.comparar(almacen.ArrayListsAlmacen.cuentas.get(i))) {
+				encontrado = true;
+			}
+		}
+		if (encontrado == true) {
+			new TiendaView();
+			frame.dispose();
+		} else if (txtFUsuario.getText().isBlank() || passwordField.getText().isBlank()) {
+			JOptionPane.showMessageDialog(btnEntrar, "Rellena los campos.");
+		} else {
+			JOptionPane.showMessageDialog(btnEntrar, "No existe ese usuario o la contraseña no es correcta.");
+		}
 	}
 }

@@ -13,22 +13,4 @@ public class Pan extends Productos {
 		super("Baguette", 0.50, 1);
 
 	}
-
-	/**
-	 * Función que debería aumentar la cantidad de panes en el ArrayList del
-	 * almacén.
-	 */
-//	public void aumentarPanes() {
-//		almacen.ArrayListsAlmacen.listaPan.add(Pan);
-//	}
-	/**
-	 * 
-	 */
-//	public void reducirPanes() {
-//		for (int i = listaPipas.size(); i > 0; i--) {
-//			pan.remove(i);
-//		}
-
-//	}
-
 }

@@ -6,8 +6,10 @@ public class Pipas extends Productos {
 		super("Pipas", 3.50, 12);
 	}
 
-	public void add(Pipas chicles) {
-	
-		
+	@Override
+	public String toString() {
+		return "Pipas [getNombre()=" + getNombre() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
 }

@@ -1,8 +1,11 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,9 +15,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import almacen.Personas;
-import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class RegisterView {
 
@@ -22,6 +22,10 @@ public class RegisterView {
 	private JTextField txtFUser;
 	private JPasswordField passwordField;
 	private JPasswordField passwordConfirm;
+	private JButton btnCrear;
+	private JButton btnLogin;
+	private String nombreUsuario;
+
 
 	/**
 	 * Launch the application. Lanza la app
@@ -58,6 +62,11 @@ public class RegisterView {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		setUIComponents();
+		setUIBehaviour();
+	}
+
+	private void setUIComponents() {
 
 		// Etiqueta con el usuario.
 		JLabel lblNewUser = new JLabel("Username:");
@@ -80,71 +89,15 @@ public class RegisterView {
 		frame.getContentPane().add(txtFUser);
 		txtFUser.setColumns(10);
 
-		/**
-		 * Aquí se crea el usuario si, y solo si, todos los parametros son correctos, es
-		 * decir, si se ha escrito algo donde hay que escribir el usuario, si se ha
-		 * puesto algo donde va la contraseña y si el espacio de la contraseña y el de
-		 * confirmar contraseña coinciden.
-		 */
-		final JButton btnCrear = new JButton("Crear cuenta");
-		btnCrear.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if ((txtFUser.getText() != null) && (passwordField.getText() != null)
-							&& (passwordConfirm.getText() != null)
-							&& passwordField.getText().equals(passwordConfirm.getText())) {
-						new TiendaView();
-						frame.dispose();
-						String nombreUsuario = txtFUser.getText();
-						String contraseña = passwordField.getText();
-						Personas usuarioActual = new Personas(nombreUsuario, contraseña);
-						almacen.ArrayListsAlmacen.cuentas.add(usuarioActual);
-						for(int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-							System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getUsername());
-							System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getPassword()); }
-						// add usuario al arraylist que hay en el almacen.}
-					} else {
-						JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
-					}
-				}
-			}
-		});
-		btnCrear.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
-				if ((txtFUser.getText() != null) && (passwordField.getText() != null)
-						&& (passwordConfirm.getText() != null)
-						&& passwordField.getText().equals(passwordConfirm.getText())) {
-					new TiendaView();
-					frame.dispose();
-					String nombreUsuario = txtFUser.getText();
-					String contraseña = passwordField.getText();
-					Personas usuarioActual = new Personas(nombreUsuario, contraseña);
-					almacen.ArrayListsAlmacen.cuentas.add(usuarioActual);
-					for(int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-						System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getUsername());
-						System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getPassword()); }
-					// add usuario al arraylist que hay en el almacen.}
-				} else {
-					JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
-				}
-			}
-		});
+		btnCrear = new JButton("Crear cuenta");
 		btnCrear.setBounds(55, 201, 114, 21);
 		frame.getContentPane().add(btnCrear);
 
 		JLabel lblLogin = new JLabel("<html>\u00BFYa tienes<br>cuenta?</html>");
 		lblLogin.setBounds(237, 166, 96, 25);
 		frame.getContentPane().add(lblLogin);
-		// Boton que lleva de vuelta al Login.
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new LoginViewTienda();
-				frame.dispose();
-			}
-		});
+
+		btnLogin = new JButton("Login");
 		btnLogin.setBounds(237, 201, 96, 21);
 		frame.getContentPane().add(btnLogin);
 
@@ -155,5 +108,60 @@ public class RegisterView {
 		passwordConfirm = new JPasswordField();
 		passwordConfirm.setBounds(187, 137, 96, 19);
 		frame.getContentPane().add(passwordConfirm);
+	}
+
+	private void setUIBehaviour() {
+		// Boton que lleva de vuelta al Login.
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LoginViewTienda();
+				frame.dispose();
+			}
+		});
+		/**
+		 * Aquí se crea el usuario si, y solo si, todos los parametros son correctos, es
+		 * decir, si se ha escrito algo donde hay que escribir el usuario, si se ha
+		 * puesto algo donde va la contraseña y si el espacio de la contraseña y el de
+		 * confirmar contraseña coinciden.
+		 */
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				registro();
+			}
+		});
+		btnCrear.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					registro();
+				}
+			}
+		});
+
+	}
+
+	@SuppressWarnings("deprecation")
+	private void registro() {
+		if ((txtFUser.getText() != null) && (passwordField.getText() != null) && (passwordConfirm.getText() != null)
+				&& passwordField.getText().equals(passwordConfirm.getText())) {
+			new TiendaView();
+			frame.dispose();
+			registrar();
+		} else {
+			// add usuario al arraylist que hay en el almacen.
+			JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
+		}
+	}
+
+	private void registrar() {
+		nombreUsuario = txtFUser.getText();
+		@SuppressWarnings("deprecation")
+		String userPassword = passwordField.getText();
+		Personas usuarioActual = new Personas(nombreUsuario, userPassword);
+		almacen.ArrayListsAlmacen.cuentas.add(usuarioActual);
+		for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
+			System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getUsername());
+			System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getPassword());
+		}
 	}
 }
