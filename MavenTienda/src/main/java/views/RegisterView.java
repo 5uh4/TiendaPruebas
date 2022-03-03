@@ -28,7 +28,7 @@ public class RegisterView {
 
 
 	/**
-	 * Launch the application. Lanza la app
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,7 +44,7 @@ public class RegisterView {
 	}
 
 	/**
-	 * Create the application. Crea la app
+	 * Create the application.
 	 */
 	public RegisterView() {
 		initialize();
@@ -54,7 +54,7 @@ public class RegisterView {
 	}
 
 	/**
-	 * Initialize the contents of the frame. Contiene todos los elementos del app.
+	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -66,24 +66,23 @@ public class RegisterView {
 		setUIBehaviour();
 	}
 
+	/**
+	 * Sets all components with their properties.
+	 */
 	private void setUIComponents() {
 
-		// Etiqueta con el usuario.
 		JLabel lblNewUser = new JLabel("Username:");
 		lblNewUser.setBounds(39, 57, 66, 13);
 		frame.getContentPane().add(lblNewUser);
 
-		// Etiqueta que solicita una contraseña
 		JLabel lblContraseña = new JLabel("Introduce tu contrase\u00F1a:");
 		lblContraseña.setBounds(22, 98, 138, 13);
 		frame.getContentPane().add(lblContraseña);
 
-		// Etiqueta para confirmar la contraseña y asegurar que es correcta.
 		JLabel lblConfirmar = new JLabel("Confirma tu contrase\u00F1a:");
 		lblConfirmar.setBounds(22, 140, 138, 13);
 		frame.getContentPane().add(lblConfirmar);
 
-		// Aquí se escribe el usuario
 		txtFUser = new JTextField();
 		txtFUser.setBounds(187, 54, 96, 19);
 		frame.getContentPane().add(txtFUser);
@@ -109,21 +108,17 @@ public class RegisterView {
 		passwordConfirm.setBounds(187, 137, 96, 19);
 		frame.getContentPane().add(passwordConfirm);
 	}
-
+	/**
+	 * Sets the behaviour each component must follow.
+	 */
 	private void setUIBehaviour() {
-		// Boton que lleva de vuelta al Login.
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new LoginViewTienda();
 				frame.dispose();
 			}
 		});
-		/**
-		 * Aquí se crea el usuario si, y solo si, todos los parametros son correctos, es
-		 * decir, si se ha escrito algo donde hay que escribir el usuario, si se ha
-		 * puesto algo donde va la contraseña y si el espacio de la contraseña y el de
-		 * confirmar contraseña coinciden.
-		 */
+	
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				registro();
@@ -140,6 +135,9 @@ public class RegisterView {
 
 	}
 
+	/**
+	 * Checks all elements are in order and executes the "registro" function.
+	 */
 	@SuppressWarnings("deprecation")
 	private void registro() {
 		if ((txtFUser.getText() != null) && (passwordField.getText() != null) && (passwordConfirm.getText() != null)
@@ -148,20 +146,17 @@ public class RegisterView {
 			frame.dispose();
 			registrar();
 		} else {
-			// add usuario al arraylist que hay en el almacen.
 			JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
 		}
 	}
-
+	/**
+	 * Creates a user that gets added to the arraylist of users.
+	 */
 	private void registrar() {
 		nombreUsuario = txtFUser.getText();
 		@SuppressWarnings("deprecation")
 		String userPassword = passwordField.getText();
 		Personas usuarioActual = new Personas(nombreUsuario, userPassword);
 		almacen.ArrayListsAlmacen.cuentas.add(usuarioActual);
-		for (int i = 0; i < almacen.ArrayListsAlmacen.cuentas.size(); i++) {
-			System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getUsername());
-			System.out.println(almacen.ArrayListsAlmacen.cuentas.get(i).getPassword());
-		}
 	}
 }

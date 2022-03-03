@@ -40,7 +40,7 @@ public class TiendaView {
 			+ almacen.ArrayListsAlmacen.listaPipas.size());
 
 	/**
-	 * Launch the application. Lanza la app.
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,7 +56,7 @@ public class TiendaView {
 	}
 
 	/**
-	 * Create the application. Crea la app.
+	 * Create the application.
 	 */
 	public TiendaView() {
 		initialize();
@@ -67,7 +67,7 @@ public class TiendaView {
 	}
 
 	/**
-	 * Initialize the contents of the frame. Contiene los elementos de la app.
+	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -80,6 +80,9 @@ public class TiendaView {
 		setUIBehaviours();
 	}
 
+	/**
+	 * Sets the components with their respective properties.
+	 */
 	private void setUIComponents() {
 
 		// Nombre de la tienda, not important.
@@ -95,22 +98,22 @@ public class TiendaView {
 
 		// Etiqueta de pipas.
 		lblPipas = new JLabel("- Pipas");
-		lblPipas.setBounds(74, 61, 48, 13);
+		lblPipas.setBounds(64, 151, 48, 13);
 		frame.getContentPane().add(lblPipas);
 
 		// Etiqueta de flecha para las pipas.
 		lblFlechaPipas = new JLabel("----->");
-		lblFlechaPipas.setBounds(132, 61, 41, 13);
+		lblFlechaPipas.setBounds(122, 151, 41, 13);
 		frame.getContentPane().add(lblFlechaPipas);
 
 		// Etiqueta con el precio de las pipas.
-		lblPrecioPipas = new JLabel("3,50\u20AC");
-		lblPrecioPipas.setBounds(183, 61, 29, 13);
+		lblPrecioPipas = new JLabel("3.50\u20AC");
+		lblPrecioPipas.setBounds(173, 151, 82, 13);
 		frame.getContentPane().add(lblPrecioPipas);
 
 		// Etiqueta con la palabra Producto, que va por encima de todo.
 		lblH1 = new JLabel("Producto");
-		lblH1.setBounds(77, 38, 45, 13);
+		lblH1.setBounds(64, 38, 45, 13);
 		frame.getContentPane().add(lblH1);
 
 		// Etiqueta con la palabra Precio, que va por encima de todo.
@@ -119,18 +122,18 @@ public class TiendaView {
 		frame.getContentPane().add(lblPrecio);
 
 		// Etiqueta de pan.
-		lblPan = new JLabel("- Pan");
-		lblPan.setBounds(77, 102, 45, 13);
+		lblPan = new JLabel("- Panes");
+		lblPan.setBounds(64, 61, 45, 13);
 		frame.getContentPane().add(lblPan);
 
 		// Etiqueta con la flecha del pan
 		lblFlechaPan = new JLabel("----->");
-		lblFlechaPan.setBounds(132, 102, 41, 13);
+		lblFlechaPan.setBounds(122, 61, 41, 13);
 		frame.getContentPane().add(lblFlechaPan);
 
 		// Etiqueta con el precio del pan.
-		lblPrecioPan = new JLabel("0,50\u20AC");
-		lblPrecioPan.setBounds(183, 102, 29, 13);
+		lblPrecioPan = new JLabel("0.50 \u20AC");
+		lblPrecioPan.setBounds(177, 61, 78, 13);
 		frame.getContentPane().add(lblPrecioPan);
 
 		// Boton para añadir pan a la cesta.
@@ -140,17 +143,17 @@ public class TiendaView {
 
 		// Etiqueta con chicles
 		lblChicle = new JLabel("- Chicles");
-		lblChicle.setBounds(64, 151, 58, 13);
+		lblChicle.setBounds(64, 102, 58, 13);
 		frame.getContentPane().add(lblChicle);
 
 		// Etiqueta con la flecha de los chicles.
 		lblFlechaChicle = new JLabel("----->");
-		lblFlechaChicle.setBounds(132, 151, 41, 13);
+		lblFlechaChicle.setBounds(122, 102, 41, 13);
 		frame.getContentPane().add(lblFlechaChicle);
 
 		// Etiqueta con el precio de los chicles.
-		lblPrecioChicle = new JLabel("0,05\u20AC");
-		lblPrecioChicle.setBounds(183, 151, 29, 13);
+		lblPrecioChicle = new JLabel("1.89 \u20AC");
+		lblPrecioChicle.setBounds(173, 102, 82, 13);
 		frame.getContentPane().add(lblPrecioChicle);
 
 		// Botón para añadir chicles a la cesta.
@@ -176,54 +179,84 @@ public class TiendaView {
 
 	}
 
+	/**
+	 * Sets the behaviour each component must follow.
+	 */
 	private void setUIBehaviours() {
 		btnPipas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Pipas pipas = null;
-				almacen.ArrayListsAlmacen.listaPipas.add(pipas);
-				sumaCestita++;
-				actualizarCesta(btnCesta);
+				añadirPipas();
 			}
 		});
 		btnPan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Pan panes = null;
-				almacen.ArrayListsAlmacen.listaPan.add(panes);
-				sumaCestita++;
-				actualizarCesta(btnCesta);
+				añadirPan();
 			}
 		});
 		btnChicle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Chicles chicle = null;
-				almacen.ArrayListsAlmacen.listaChicles.add(chicle);
-				sumaCestita++;
-				actualizarCesta(btnCesta);
+				añadirChicle();
 			}
 		});
 		btnCesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CestaView(frame);
+				new CestaView();
 				frame.setVisible(false);
 			}
 		});
 		btnOff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirmado = JOptionPane.showConfirmDialog(btnOff, "¿Desea cerrar sesión?", "Cierre de sesión",
-						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (JOptionPane.OK_OPTION == confirmado) {
-					System.out.println("Saliendo.");
-					new LoginViewTienda();
-					frame.dispose();
-					JOptionPane.showMessageDialog(btnOff, "Saliendo.");
-				} else {
-					JOptionPane.showMessageDialog(btnOff, "Volviendo.");
-				}
+				cerrarSesion();
 			}
 		});
 	}
-
+	/**
+	 * Makes sure the element "Cesta" gets updated each time a product is added.
+	 * @param btnCesta The button's text to be updated.
+	 */
 	public void actualizarCesta(JButton btnCesta) {
 		btnCesta.setText("Cesta (" + sumaCestita + ")");
+	}
+	/**
+	 * Returns the user to the main login view.
+	 */
+	public void cerrarSesion() {
+		int confirmado = JOptionPane.showConfirmDialog(btnOff, "¿Desea cerrar sesión?", "Cierre de sesión",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (JOptionPane.OK_OPTION == confirmado) {
+			System.out.println("Saliendo.");
+			new LoginViewTienda();
+			frame.dispose();
+			JOptionPane.showMessageDialog(btnOff, "Saliendo.");
+		} else {
+			JOptionPane.showMessageDialog(btnOff, "Volviendo.");
+		}
+	}
+	/**
+	 * Adds an element to the arraylist "Chicle".
+	 */
+	public void añadirChicle() {
+		Chicles chicle = null;
+		almacen.ArrayListsAlmacen.listaChicles.add(chicle);
+		sumaCestita++;
+		actualizarCesta(btnCesta);
+	}
+	/**
+	 * Adds an element to the arraylist "Pan".
+	 */
+	public void añadirPan() {
+		Pan panes = null;
+		almacen.ArrayListsAlmacen.listaPan.add(panes);
+		sumaCestita++;
+		actualizarCesta(btnCesta);
+	}
+	/**
+	 * Adds an element to the arraylist "Pipas".
+	 */
+	public void añadirPipas() {
+		Pipas pipas = null;
+		almacen.ArrayListsAlmacen.listaPipas.add(pipas);
+		sumaCestita++;
+		actualizarCesta(btnCesta);
 	}
 }

@@ -1,8 +1,11 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,10 +15,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import almacen.Personas;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class LoginViewTienda {
 
@@ -28,7 +27,7 @@ public class LoginViewTienda {
 	// private Personas usuario;
 
 	/**
-	 * Launch the application. Aquí se abre la aplicación que se define más abajo.
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,7 +51,7 @@ public class LoginViewTienda {
 	}
 
 	/**
-	 * Initialize the contents of the frame. Contiene los elementos de la aplicación
+	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -63,6 +62,9 @@ public class LoginViewTienda {
 		setUIComponents();
 		setUIBehaviour();
 	}
+	/**
+	 * Sets all elements with their properties.
+	 */
 	private void setUIComponents() {
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(67, 68, 55, 13);
