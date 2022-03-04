@@ -114,7 +114,7 @@ public class RegisterView {
 	private void setUIBehaviour() {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new LoginViewTienda();
+				new LoginView();
 				frame.dispose();
 			}
 		});

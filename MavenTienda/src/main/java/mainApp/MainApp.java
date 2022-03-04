@@ -1,7 +1,7 @@
 package mainApp;
 
 import almacen.Personas;
-import views.LoginViewTienda;
+import views.LoginView;
 
 public class MainApp {
 
@@ -9,7 +9,7 @@ public class MainApp {
 		// Aquí se lanza la aplicación, con el login en funcionamiento, y dos cuentas creadas.
 		almacen.ArrayListsAlmacen.cuentas.add(new Personas("usuarioPrueba", "1234"));
 		almacen.ArrayListsAlmacen.cuentas.add(new Personas ("a1", "12"));
-		new LoginViewTienda();
+		new LoginView();
 	}
 
 }

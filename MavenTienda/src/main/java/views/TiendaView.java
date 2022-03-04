@@ -225,7 +225,7 @@ public class TiendaView {
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if (JOptionPane.OK_OPTION == confirmado) {
 			System.out.println("Saliendo.");
-			new LoginViewTienda();
+			new LoginView();
 			frame.dispose();
 			JOptionPane.showMessageDialog(btnOff, "Saliendo.");
 		} else {

@@ -246,7 +246,7 @@ public class CestaView {
 			almacen.ArrayListsAlmacen.listaChicles.clear();
 			almacen.ArrayListsAlmacen.listaPan.clear();
 			almacen.ArrayListsAlmacen.listaPipas.clear();
-			new LoginViewTienda();
+			new LoginView();
 			frame.dispose();
 			JOptionPane.showMessageDialog(btnComprar, "Compra realizada.");
 		} else {
