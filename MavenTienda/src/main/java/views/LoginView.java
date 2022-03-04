@@ -26,6 +26,20 @@ public class LoginView {
 	private JButton btnEntrar;
 	// private Personas usuario;
 
+	// ############################
+	public JFrame getJFrame() {
+		return frame;
+	}
+
+	public JTextField getTextField() {
+		return txtFUsuario;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+	// ############################
+
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +76,7 @@ public class LoginView {
 		setUIComponents();
 		setUIBehaviour();
 	}
+
 	/**
 	 * Sets all elements with their properties.
 	 */
@@ -104,7 +119,7 @@ public class LoginView {
 		passwordField.setBounds(180, 108, 147, 19);
 		frame.getContentPane().add(passwordField);
 	}
-	
+
 	public void setUIBehaviour() {
 		btnEntrar.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {

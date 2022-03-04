@@ -26,6 +26,20 @@ public class RegisterView {
 	private JButton btnLogin;
 	private String nombreUsuario;
 
+	// ############################
+	public JFrame getJFrame() {
+		return frame;
+	}
+
+	public JTextField getTextField() {
+		return txtFUser;
+	}
+
+	public JPasswordField[] getPasswordFields() {
+		JPasswordField[] contras = { passwordField, passwordConfirm };
+		return contras;
+	}
+	// ############################
 
 	/**
 	 * Launch the application.
@@ -108,6 +122,7 @@ public class RegisterView {
 		passwordConfirm.setBounds(187, 137, 96, 19);
 		frame.getContentPane().add(passwordConfirm);
 	}
+
 	/**
 	 * Sets the behaviour each component must follow.
 	 */
@@ -118,7 +133,7 @@ public class RegisterView {
 				frame.dispose();
 			}
 		});
-	
+
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				registro();
@@ -149,6 +164,7 @@ public class RegisterView {
 			JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
 		}
 	}
+
 	/**
 	 * Creates a user that gets added to the arraylist of users.
 	 */

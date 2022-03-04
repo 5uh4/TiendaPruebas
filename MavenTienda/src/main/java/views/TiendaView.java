@@ -39,6 +39,16 @@ public class TiendaView {
 	public int sumaCestita = (almacen.ArrayListsAlmacen.listaChicles.size() + almacen.ArrayListsAlmacen.listaPan.size()
 			+ almacen.ArrayListsAlmacen.listaPipas.size());
 
+	// ############################
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public int getSumaCesta() {
+		return sumaCestita;
+	}
+	// ############################
+
 	/**
 	 * Launch the application.
 	 */
@@ -210,13 +220,16 @@ public class TiendaView {
 			}
 		});
 	}
+
 	/**
 	 * Makes sure the element "Cesta" gets updated each time a product is added.
+	 * 
 	 * @param btnCesta The button's text to be updated.
 	 */
 	public void actualizarCesta(JButton btnCesta) {
 		btnCesta.setText("Cesta (" + sumaCestita + ")");
 	}
+
 	/**
 	 * Returns the user to the main login view.
 	 */
@@ -232,6 +245,7 @@ public class TiendaView {
 			JOptionPane.showMessageDialog(btnOff, "Volviendo.");
 		}
 	}
+
 	/**
 	 * Adds an element to the arraylist "Chicle".
 	 */
@@ -241,6 +255,7 @@ public class TiendaView {
 		sumaCestita++;
 		actualizarCesta(btnCesta);
 	}
+
 	/**
 	 * Adds an element to the arraylist "Pan".
 	 */
@@ -250,6 +265,7 @@ public class TiendaView {
 		sumaCestita++;
 		actualizarCesta(btnCesta);
 	}
+
 	/**
 	 * Adds an element to the arraylist "Pipas".
 	 */
