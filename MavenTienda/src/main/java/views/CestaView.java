@@ -26,6 +26,16 @@ public class CestaView {
 	private double cantidadChicles = almacen.ArrayListsAlmacen.listaChicles.size();
 	private double cantidadPipas = almacen.ArrayListsAlmacen.listaPipas.size();
 
+	// ############################
+	public JFrame getJFrame() {
+		return frame;
+	}
+	
+	public void dispose() {
+		frame.dispose();
+	}
+	// ############################
+
 	/**
 	 * Create the application.
 	 */
@@ -191,6 +201,7 @@ public class CestaView {
 			JOptionPane.showMessageDialog(btnBorrarPan, "No has añadido este producto.");
 		}
 	}
+
 	/**
 	 * Deletes the last item of type "Chicle" in the array list if it is not empty.
 	 */
@@ -222,7 +233,7 @@ public class CestaView {
 	}
 
 	/**
-	 * If confirmed returns the user to the view of the shop. 
+	 * If confirmed returns the user to the view of the shop.
 	 */
 	public void seguir() {
 		int confirmadoSeguir = JOptionPane.showConfirmDialog(btnSeguir, "Volver a tienda.", "Confirmación de compra",
@@ -246,7 +257,7 @@ public class CestaView {
 			almacen.ArrayListsAlmacen.listaChicles.clear();
 			almacen.ArrayListsAlmacen.listaPan.clear();
 			almacen.ArrayListsAlmacen.listaPipas.clear();
-			new LoginViewTienda();
+			new LoginView();
 			frame.dispose();
 			JOptionPane.showMessageDialog(btnComprar, "Compra realizada.");
 		} else {
