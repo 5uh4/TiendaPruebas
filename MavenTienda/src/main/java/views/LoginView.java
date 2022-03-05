@@ -38,6 +38,10 @@ public class LoginView {
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
+	
+	public void dispose() {
+		frame.dispose();
+	}
 	// ############################
 
 	/**

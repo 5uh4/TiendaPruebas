@@ -30,6 +30,10 @@ public class CestaView {
 	public JFrame getJFrame() {
 		return frame;
 	}
+	
+	public void dispose() {
+		frame.dispose();
+	}
 	// ############################
 
 	/**

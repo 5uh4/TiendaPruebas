@@ -47,6 +47,10 @@ public class TiendaView {
 	public int getSumaCesta() {
 		return sumaCestita;
 	}
+	
+	public void dispose() {
+		frame.dispose();
+	}
 	// ############################
 
 	/**

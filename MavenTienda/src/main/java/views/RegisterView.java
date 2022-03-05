@@ -39,6 +39,10 @@ public class RegisterView {
 		JPasswordField[] contras = { passwordField, passwordConfirm };
 		return contras;
 	}
+	
+	public void dispose() {
+		frame.dispose();
+	}
 	// ############################
 
 	/**
@@ -154,7 +158,7 @@ public class RegisterView {
 	 * Checks all elements are in order and executes the "registro" function.
 	 */
 	@SuppressWarnings("deprecation")
-	private void registro() {
+	public void registro() {
 		if ((txtFUser.getText() != null) && (passwordField.getText() != null) && (passwordConfirm.getText() != null)
 				&& passwordField.getText().equals(passwordConfirm.getText())) {
 			new TiendaView();
